@@ -3,7 +3,7 @@
 from socket import *
 
 def main():
-    daemonPORT = 8084
+    daemonPort = 8084
     clientHost = gethostname()
     clientAddr = gethostbyname('{}'.format(clientHost))
 

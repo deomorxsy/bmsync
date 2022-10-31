@@ -58,10 +58,12 @@ def main():
                         for i in clients:
                             if '{}'.format(clientAddress) in dnsTable:
                                 f.close()
-                            elif:
-                                dnsTable['{}'.format(clientAddress)] = socket.gethostbyaddr(clientAddress))
+                            elif not('{}'.format(clientAddress) in dnsTable):
+                                dnsTable['{}'.format(clientAddress)] = socket.gethostbyaddr(clientAddress)
                                 foo['{}'.format(clientAddress)] = socket.gethostbyaddr(clientAddress)
                                 f.close()
+                            else:
+                                print('outra coisa')
 
 
                 if foo != 0:

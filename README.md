@@ -10,8 +10,8 @@ Basically the user-data communication happens over TCP once discovery is complet
 Be sure to be in the root of the project repository directory:
 
 ```
-git clone thisproj
-cd ./thisproj/
+git clone git@github.com:deomorxsy/bmsync.git
+cd ./bmsync/
 ```
 
 Create Python virtual environment (virtualenv, venv), upgrade the package manager pip, install the new Python distribution, Wheels, and install dependencies listed on ```requirements.txt```.
