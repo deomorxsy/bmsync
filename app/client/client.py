@@ -22,6 +22,9 @@ def main():
         print('//// > Type:')
         send_msg = input()
 
+
+
+
     udp_client_socket.close()
 
 

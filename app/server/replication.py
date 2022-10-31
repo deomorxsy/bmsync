@@ -3,7 +3,7 @@
 from socket import *
 import json
 
-def main():
+def replication():
 
     daemonPort = 8084
 
@@ -31,4 +31,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    replication()

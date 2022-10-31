@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
+from fileTransfer import *
+from replication import *
+
 import pathlib
 from socket import *
-from fileTransfer import *
 import time
 import sys
 import concurrent.futures # threadpool executor
@@ -34,18 +36,18 @@ def main():
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
         #_ = {executor.submit(load_url, url, 60) for connection in serverSocket }
-        with socket(AF_INET, SOCK_DGRAM) as serverSock:
-            serverSock.bind((suseIP, susePort))
+        with socket(AF_INET, SOCK_DGRAM) as udpServerSock:
+            udpServerSock.bind((suseIP, susePort))
             #serverSock.listen(10)
 
             # UDP connection does not requires an accept().
             # in case of a TCP connection, it does 3-way handshake.
             print('//// > Listening for incoming DATAGRAMS on 127.0.0.1:8080...')
             while True:
-                #conn, addr = serverSock.accept() #UDP NAO INICIA CONEXAO
+                #conn, addr = udpServerSock.accept() #UDP NAO INICIA CONEXAO
                 #print("//// > IPV4 Connection established with address {}".format(addr))
 
-                bytesAddressPair = serverSock.recv(bufferSize) # 1024 default. Could also be 2048
+                bytesAddressPair = udpServerSock.recv(bufferSize) # 1024 default. Could also be 2048
                 clientMessage = bytesAddressPair[0] # retrieve message
                 clientAddress = bytesAddressPair[1] # retrieve address
 
@@ -54,12 +56,12 @@ def main():
                 with open('../var/dnsTable.json', 'r', ) as f:
                         clients = f.load(j)
                         for i in clients:
-                    if '{}'.format(clientAddress) in dnsTable:
-                        f.close()
-                    elif:
-                        dnsTable['{}'.format(clientAddress)] = socket.gethostbyaddr(clientAddress))
-                        foo['{}'.format(clientAddress)] = socket.gethostbyaddr(clientAddress)
-                        f.close()
+                            if '{}'.format(clientAddress) in dnsTable:
+                                f.close()
+                            elif:
+                                dnsTable['{}'.format(clientAddress)] = socket.gethostbyaddr(clientAddress))
+                                foo['{}'.format(clientAddress)] = socket.gethostbyaddr(clientAddress)
+                                f.close()
 
 
                 if foo != 0:
@@ -77,10 +79,11 @@ def main():
 
 
                 #now reply to client
-                serverSock.sendto(sendBytes, address)
+                udpServerSock.sendto(sendBytes, address)
 
-                # Reads Domain Name database and stablishes tcp connection
-                fileTransfer()
+        # stablishes tcp connection
+        with  socket(AF_INET, SOCK_STREAM) as tcpServerSock:
+            fileTransfer(tcpServerSock, suseIP, 5005 )
 
 
                 #print(type)
