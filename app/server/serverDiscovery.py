@@ -3,7 +3,7 @@
 from fileTransfer import *
 from replication import *
 
-import pathlib
+from pathlib import Path
 from socket import *
 import time
 import sys
@@ -16,20 +16,14 @@ def main():
     suseSocket = (suseIP, susePort)
     suseHost = gethostname()
     bufferSize = 1024 #For UDP datagram
-    #serverSocket = socket(AF_INET, SOCK_DGRAM)
-    #serverSocket.bind((gethostname(), 8080))
-    #serverSocket.listen(5) # max 5 connections
-
-    #SOCK_DGRAM = UDP, datagram socket with no connection
-    #SOCK_STREAM = TCP,
 
     serverMSG = "/// > Greetings, UDP client!"
     sendBytes = str.encode(serverMSG)
     dnsTable = {} #DNS table
 
     # Checks if DNS table exists with os-agnostic libpath library
-    if (Path('../var/dnsTable.json').exists()) == False:
-        with open('../var/dnsTable.json', 'w+') as f:
+    if (Path('../../var/dnsTable.json').exists()) == False:
+        with open('../../var/dnsTable.json', 'w+') as f:
             f.write('')
             f.close()
 
@@ -47,7 +41,7 @@ def main():
                 #conn, addr = udpServerSock.accept() #UDP NAO INICIA CONEXAO
                 #print("//// > IPV4 Connection established with address {}".format(addr))
 
-                bytesAddressPair = udpServerSock.recv(bufferSize) # 1024 default. Could also be 2048
+                bytesAddressPair = udpServerSock.recv(bufferSize) # 1024 default for UDP. 2048 when using TCP
                 clientMessage = bytesAddressPair[0] # retrieve message
                 clientAddress = bytesAddressPair[1] # retrieve address
 

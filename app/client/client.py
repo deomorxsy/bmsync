@@ -11,11 +11,13 @@ def main():
     client_sock = socket(AF_INET, SOCK_DGRAM)
 
     recv_msg = None
-    send_msg = input('//// Connecting to 127.0.0.1:8080 . . .\n//// > Type a message message')
+    send_msg = input('//// Connecting to 127.0.0.1:8080 . . .\n//// Type a message message:\n// >  ')
+    print(type(send_msg))
+    print(str.encode(send_msg))
 
     while send_msg != '\x18': # ctrl+X? Ctrl+c?
         print('//// > Press CTRL-C to stop.\n')
-        client_sock.sendto(send_msg.encode(), SOCKET)
+        client_sock.sendto(str.encode(send_msg), SOCKET)
         time.sleep(0.5)
         recv_msg, _ = client_sock.recvfrom(2048) # numero de bytes aceitos
         print('//// > Server response:\n'.format(recv_msg.decode('utf-8')))
