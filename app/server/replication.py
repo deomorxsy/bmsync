@@ -2,6 +2,7 @@
 
 from socket import *
 import json
+import random
 
 def replication():
 

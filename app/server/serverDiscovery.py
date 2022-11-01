@@ -31,7 +31,7 @@ def main():
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
         #_ = {executor.submit(load_url, url, 60) for connection in serverSocket }
         with socket(AF_INET, SOCK_DGRAM) as udpServerSock:
-            udpServerSock.bind((suseIP, susePort))
+            udpServerSock.bind(suseSocket)
             #serverSock.listen(10)
 
             # UDP connection does not requires an accept().
@@ -41,7 +41,8 @@ def main():
                 #conn, addr = udpServerSock.accept() #UDP NAO INICIA CONEXAO
                 #print("//// > IPV4 Connection established with address {}".format(addr))
 
-                bytesAddressPair = udpServerSock.recv(bufferSize) # 1024 default for UDP. 2048 when using TCP
+                #recvfrom to udp, recv for tcp? Yep.
+                bytesAddressPair = udpServerSock.recvfrom(bufferSize) # 1024 default for UDP. 2048 when using TCP
                 clientMessage = bytesAddressPair[0] # retrieve message
                 clientAddress = bytesAddressPair[1] # retrieve address
 
