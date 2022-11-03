@@ -2,11 +2,11 @@
 
 import os
 import errno
-import socket
+import socket # pep 8
 import subprocess #substitute of os package
 
 def fileTransfer(sock, host, port):
-    ftSock = connect((host, port))
+    ftSock = socket.connect((host, port))
     #total = 0
 
     menuOption = input('/// Options\n1- List files in shared directory\n2- Upload a file\n3- Download file\n4- Synchronize files')

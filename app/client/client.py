@@ -43,7 +43,7 @@ def main():
 
 
 
-    clientSock.close()
+    #clientSock.close()
 
 
 
