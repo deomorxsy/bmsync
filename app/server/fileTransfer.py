@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import os
 import errno
 import socket
 import subprocess #substitute of os package
@@ -19,7 +20,7 @@ def fileTransfer(sock, host, port):
         while True:
             l = f.read(1024)
             while (l):
-                self.sock.send(l)
+                sock.send(l)
                 l = f.read(1024)
 
             if not l:
@@ -38,5 +39,5 @@ def fileTransfer(sock, host, port):
 
 
 if __name__ == '__main__':
-    main()
+    fileTransfer()
 

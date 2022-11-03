@@ -1,3 +1,7 @@
+#outros
+exampleclient.py
+exampleserver.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
